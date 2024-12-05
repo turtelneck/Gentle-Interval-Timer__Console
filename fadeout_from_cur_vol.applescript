@@ -8,7 +8,7 @@ on run
 	-- Gradually decrease volume
 	repeat with X from currentVolume to desiredVolume by -1
 		set X to round (X) -- Ensure X is an integer
-		set volume output volume X
+			 X
 		delay waitTime
 	end repeat
 	
