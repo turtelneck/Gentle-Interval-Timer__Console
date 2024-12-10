@@ -4,7 +4,7 @@ on run
 		set isSpotifyRunning to (exists (process "Spotify"))
 		set isMusicRunning to (exists (process "Music"))
 	end tell
-
+	
 	if isSpotifyRunning then
 		tell application "Spotify"
 			play

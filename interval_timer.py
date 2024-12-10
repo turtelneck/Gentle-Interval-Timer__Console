@@ -15,29 +15,28 @@ with open("play_spotify_or_music.applescript", "r") as script_file:
 user_minutes = float(input("Desired minutes per loop: "))
 interval_seconds = int(user_minutes * 60)
 interval_count = int(input("Desired number of timer repetitions: "))
-sound_file = "wave_sounds.wav"
+sound_file = "./wave_sounds.wav"
 
 
 def fade_pause_play(sound_file_path):
     # print("Interval over, fading out music")
     prev_vol = subprocess.run(["osascript", "-e", fadeout_script], text=True, capture_output=True)
-    prev_vol_stripped = result.stdout.strip()
+    prev_vol_stripped = prev_vol.stdout.strip()
 
     # print("Pausing music...")
-    was_playing = subprocess.run(['osascript', '-e', pause_script, str(prev_vol)])
-    was_playing_stripped = was_playing.stdout.strip()
+    was_playing = subprocess.run(['osascript', '-e', pause_script, str(prev_vol_stripped)])
 
-    # print("Playing chosen sound file")
-    playsound(sound_file_path)
+    print("Playing chosen sound file")
+    playsound(sound_file)
 
     # only required if music was playing previously
     # pause_script already sets volume back at normal levels
-    if was_playing_stripped:
+    if was_playing:
         # print("Unpausing music...")
         subprocess.run(['osascript', '-e', play_script])
 
         # print("Fading music in")
-        subprocess.run(['osascript', '-e', fadein_script, str(prev_vol)])
+        subprocess.run(['osascript', '-e', fadein_script, str(prev_vol_stripped)])
 
 
 def timer(interval, sound_file_path):
