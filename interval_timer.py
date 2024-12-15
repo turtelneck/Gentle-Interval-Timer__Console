@@ -12,11 +12,6 @@ with open("pause_spotify_or_music.applescript", "r") as script_file:
 with open("play_spotify_or_music.applescript", "r") as script_file:
     play_script = script_file.read()
 
-user_minutes = float(input("Desired minutes per loop: "))
-interval_seconds = int(user_minutes * 60)
-interval_count = int(input("Desired number of timer repetitions: "))
-sound_file = "./wave_sounds.wav"
-
 
 def fade_pause_play(sound_file_path):
     # print("Interval over, fading out music")
@@ -39,8 +34,8 @@ def fade_pause_play(sound_file_path):
         subprocess.run(['osascript', '-e', fadein_script, str(prev_vol_stripped)])
 
 
-def timer(interval, sound_file_path):
-    time.sleep(interval) # first timer runs outside loop
+def timer(interval_seconds, interval_count, sound_file_path):
+    time.sleep(interval_seconds) # first timer runs outside loop
     for _ in range(interval_count - 1):
         print("Interval loop complete, starting new loop")
         start_time = time.time()
@@ -62,8 +57,13 @@ def timer(interval, sound_file_path):
 
 
 def main():
+    user_minutes = float(input("Desired minutes per loop: "))
+    interval_seconds = int(user_minutes * 60)
+    interval_count = int(input("Desired number of timer repetitions: "))
+    sound_file = "./wave_sounds.wav"
+    
     print(f"Starting a timer that repeats every {user_minutes} minutes.")
-    timer_thread = threading.Thread(target=timer, args=(interval_seconds, sound_file))
+    timer_thread = threading.Thread(target=timer, args=(interval_seconds, interval_count, sound_file))
     timer_thread.start()
     timer_thread.join()
 
