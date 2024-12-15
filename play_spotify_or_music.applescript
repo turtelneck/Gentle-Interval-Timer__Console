@@ -8,12 +8,12 @@ on run
 	if isSpotifyRunning then
 		tell application "Spotify"
 			play
-			log "resumed Spotify successfully!"
+			--log "resumed Spotify successfully!"
 		end tell
 	else if isMusicRunning then
 		tell application "Music"
 			play
-			log "resumed Music successfully!"
+			--log "resumed Music successfully!"
 		end tell
 	else
 		log "Neither Spotify nor Music is currently running."
