@@ -4,7 +4,7 @@ from playsound import playsound
 import threading
 
 
-def fade_pause_plays(player_check, fadeout, pause, play, fadein, nature_sound):
+def fade_pause_play(player_check, fadeout, pause, play, fadein, nature_sound):
     result = subprocess.run(['osascript', '-e', player_check], text=True, capture_output=True)
     was_playing = result.stdout.strip().lower() == "true"
     
@@ -35,9 +35,7 @@ def timer(interval_seconds, interval_count, nature_sound, player_check, fadeout,
         print(f'{mins} min, {sec} sec timer, repeats for {interval_count} more intervals\n')
         start_time = time.time()
         
-        fade_thread = threading.Thread(target=fade_pause_plays, args=(player_check, fadeout, pause, play, fadein, nature_sound,))
-        fade_thread.start()
-        fade_thread.join() # ensures timer never outpaces fade_pause_play
+        fade_pause_play(player_check, fadeout, pause, play, fadein, nature_sound)
         
         # timer waits for time remaining, accounting for fade_pause_play execution time
         elapsed_time = time.time() - start_time
@@ -47,9 +45,8 @@ def timer(interval_seconds, interval_count, nature_sound, player_check, fadeout,
         # print(time_to_wait)
         time.sleep(time_to_wait)
     
-    fade_thread = threading.Thread(target=fade_pause_plays, args=(player_check, fadeout, pause, play, fadein, nature_sound,))
-    fade_thread.start()
-    fade_thread.join()
+    # final nature sound played outside loop
+    fade_pause_play(player_check, fadeout, pause, play, fadein, nature_sound)
 
 
 def main():
@@ -71,9 +68,8 @@ def main():
     interval_count = int(input("Desired number of timer repetitions: "))
     print('\n')
     
-    timer_thread = threading.Thread(target=timer, args=(interval_seconds, interval_count, nature_sound, player_check, fadeout, pause, play, fadein))
-    timer_thread.start()
-    timer_thread.join()
+    timer(interval_seconds, interval_count, nature_sound, player_check, fadeout, pause, play, fadein)
+
 
 if __name__ == "__main__":
     main()
