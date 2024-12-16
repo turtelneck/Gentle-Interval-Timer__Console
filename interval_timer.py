@@ -40,7 +40,7 @@ def timer(interval_seconds, interval_count, nature_sound, player_check, fadeout,
         elapsed_time = time.time() - start_time
         print(f'{mins} min, {sec} sec timer beginning, repeats for {interval_count} intervals\n')
         # print(elapsed_time)
-        time_to_wait = max(0, interval - elapsed_time)
+        time_to_wait = max(0, interval_seconds - elapsed_time)
         # print(time_to_wait)
         time.sleep(time_to_wait)
     
@@ -49,15 +49,15 @@ def timer(interval_seconds, interval_count, nature_sound, player_check, fadeout,
 
 
 def main():
-    with open("player_check.applescript", "r") as script_file:
+    with open("player_check.applescript", "r", encoding="utf-8") as script_file:
         player_check = script_file.read()
-    with open("fadeout_from_cur_vol.applescript", "r") as script_file:
+    with open("fadeout_from_cur_vol.applescript", "r", encoding="utf-8") as script_file:
         fadeout = script_file.read()
-    with open("fadein_to_desired_vol.applescript", "r") as script_file:
+    with open("fadein_to_desired_vol.applescript", "r", encoding="utf-8") as script_file:
         fadein = script_file.read()
-    with open("pause_spotify_or_music.applescript", "r") as script_file:
+    with open("pause_spotify_or_music.applescript", "r", encoding="utf-8") as script_file:
         pause = script_file.read()
-    with open("play_spotify_or_music.applescript", "r") as script_file:
+    with open("play_spotify_or_music.applescript", "r", encoding="utf-8") as script_file:
         play = script_file.read()
     
     nature_sound = "./wave_sounds.wav"
