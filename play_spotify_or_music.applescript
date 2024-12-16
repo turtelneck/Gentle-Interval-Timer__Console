@@ -1,5 +1,8 @@
 on run
+	
+	set currentVolume to output volume of (get volume settings)
 	set volume output volume 0
+	
 	tell application "System Events"
 		set isSpotifyRunning to (exists (process "Spotify"))
 		set isMusicRunning to (exists (process "Music"))
@@ -18,4 +21,7 @@ on run
 	else
 		log "Neither Spotify nor Music is currently running."
 	end if
+	
+	return currentVolume
+	
 end run

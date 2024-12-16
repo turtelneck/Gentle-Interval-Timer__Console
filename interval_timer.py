@@ -7,24 +7,20 @@ import threading
 def fade_pause_plays(player_check, fadeout, pause, play, fadein, nature_sound):
     result = subprocess.run(['osascript', '-e', player_check], text=True, capture_output=True)
     was_playing = result.stdout.strip().lower() == "true"
-    prev_vol = '0' # placeholder
     
     if was_playing:
-        print("it was playing????")
-        # print("Interval over, fading out music")
         result = subprocess.run(['osascript', '-e', fadeout], text=True, capture_output=True)
         prev_vol = result.stdout.strip()
 
-        # print("Pausing music...")
         subprocess.run(['osascript', '-e', pause, str(prev_vol)])
 
     playsound(nature_sound)
     
     if was_playing:
-        # print("Unpausing music...")
-        subprocess.run(['osascript', '-e', play])
+        # prev_vol is captured separately here from above in case a user adjusts volume during playsound()
+        result = subprocess.run(['osascript', '-e', play], text=True, capture_output=True)
+        prev_vol = result.stdout.strip()
 
-        # print("Fading music in")
         subprocess.run(['osascript', '-e', fadein, str(prev_vol)])
 
 
@@ -68,10 +64,12 @@ def main():
     with open("play_spotify_or_music.applescript", "r") as script_file:
         play = script_file.read()
     
+    nature_sound = "./wave_sounds.wav"
+    
     user_minutes = float(input("Desired minutes per loop: "))
     interval_seconds = int(user_minutes * 60)
     interval_count = int(input("Desired number of timer repetitions: "))
-    nature_sound = "./wave_sounds.wav"
+    print('\n')
     
     timer_thread = threading.Thread(target=timer, args=(interval_seconds, interval_count, nature_sound, player_check, fadeout, pause, play, fadein))
     timer_thread.start()
