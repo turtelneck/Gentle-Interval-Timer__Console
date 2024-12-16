@@ -10,9 +10,8 @@ def fade_pause_plays(fadeout, pause, play, fadein, nature_sound):
     prev_vol_stripped = prev_vol.stdout.strip()
 
     # print("Pausing music...")
-    was_playing = subprocess.run(['osascript', '-e', pause, str(prev_vol_stripped)])
-    msg = "TRUUUUUUUUUUUUE" if was_playing else "FAAAAAAAAAAAAAAALSE"
-    print(msg)
+    result = subprocess.run(['osascript', '-e', pause, str(prev_vol_stripped)], text=True, capture_output=True)
+    was_playing = result.stdout.strip().lower() == "true"
 
     playsound(nature_sound)
 
