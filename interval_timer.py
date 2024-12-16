@@ -1,7 +1,6 @@
 import time
 import subprocess
 from playsound import playsound
-import threading
 
 
 def fade_pause_play(player_check, fadeout, pause, play, fadein, nature_sound):
@@ -78,9 +77,9 @@ if __name__ == "__main__":
 # BUGS:
 # 
 # if volume starts muted, fadeout AppleScript divides by zero (not fatal)
+# program breaks if no input is given
                              
 
 # TO DO:
 # 
 # add the ability to kill the timer and restart with typed commands, possibly via threading?
-# remove redundant threading
