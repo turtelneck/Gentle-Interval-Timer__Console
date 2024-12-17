@@ -27,8 +27,12 @@ def timer(interval_seconds, interval_count, nature_sound, player_check, fadeout,
     mins = interval_seconds // 60
     sec = interval_seconds - mins * 60
     
+    time.sleep(0.3)
+    print('\nTO CANCEL: control^c')
+    time.sleep(0.4)
+    print('\nTimer Beginning')
+    time.sleep(0.8)
     print(f'{mins} min, {sec} sec timer, repeats for {interval_count} intervals')
-    print('To cancel timer: control^c')
     time.sleep(interval_seconds) # first timer runs outside loop
     
     for _ in range(interval_count - 1):
@@ -62,12 +66,13 @@ def main():
     
     nature_sound = "./wave_sounds.wav"
     
-    user_minutes = float(input("Desired minutes per loop: "))
+    user_minutes = float(input("\nDesired minutes per loop: "))
     interval_seconds = int(user_minutes * 60)
     interval_count = int(input("Desired number of timer repetitions: "))
     
     timer(interval_seconds, interval_count, nature_sound, player_check, fadeout, pause, play, fadein)
-
+    print('\nAll loops complete!\n')
+    
 
 if __name__ == "__main__":
     main()
