@@ -27,7 +27,8 @@ def timer(interval_seconds, interval_count, nature_sound, player_check, fadeout,
     mins = interval_seconds // 60
     sec = interval_seconds - mins * 60
     
-    print(f'{mins} min, {sec} sec timer, repeats for {interval_count} intervals\n')
+    print(f'{mins} min, {sec} sec timer, repeats for {interval_count} intervals')
+    print('To cancel timer: control^c')
     time.sleep(interval_seconds) # first timer runs outside loop
     
     for _ in range(interval_count - 1):
@@ -75,8 +76,7 @@ if __name__ == "__main__":
 # BUGS:
 # 
 # program breaks if no input is given
-                             
 
-# TO DO:
+# TODO:
 # 
-# add the ability to kill the timer and restart with typed commands, possibly via threading?
+#
