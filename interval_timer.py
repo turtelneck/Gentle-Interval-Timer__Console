@@ -1,6 +1,7 @@
 import time
 import subprocess
 from playsound import playsound
+import input_valid
 
 
 def fade_pause_play(player_check, fadeout, pause, play, fadein, nature_sound):
@@ -66,9 +67,9 @@ def main():
     
     nature_sound = "./wave_sounds.wav"
     
-    user_minutes = float(input("\nDesired minutes per loop: "))
+    user_minutes = input_valid.get_valid_float("\nDesired minutes per loop: ")
     interval_seconds = int(user_minutes * 60)
-    interval_count = int(input("Desired number of timer repetitions: "))
+    interval_count = input_valid.get_valid_int("\nDesired number of timer repetitions: ")
     
     timer(interval_seconds, interval_count, nature_sound, player_check, fadeout, pause, play, fadein)
     print('\nAll loops complete!\n')
@@ -80,7 +81,7 @@ if __name__ == "__main__":
 
 # BUGS:
 # 
-# program breaks if no input is given
+#
 
 # TODO:
 # 
