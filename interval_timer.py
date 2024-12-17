@@ -31,14 +31,13 @@ def timer(interval_seconds, interval_count, nature_sound, player_check, fadeout,
     time.sleep(interval_seconds) # first timer runs outside loop
     
     for _ in range(interval_count - 1):
-        print(f'{mins} min, {sec} sec timer, repeats for {interval_count} more intervals\n')
         start_time = time.time()
         
         fade_pause_play(player_check, fadeout, pause, play, fadein, nature_sound)
+        print(f'{mins} min, {sec} sec timer, repeats for {interval_count - _ - 1} more intervals\n')
         
         # timer waits for time remaining, accounting for fade_pause_play execution time
         elapsed_time = time.time() - start_time
-        print(f'{mins} min, {sec} sec timer beginning, repeats for {interval_count} intervals\n')
         # print(elapsed_time)
         time_to_wait = max(0, interval_seconds - elapsed_time)
         # print(time_to_wait)
@@ -65,7 +64,6 @@ def main():
     user_minutes = float(input("Desired minutes per loop: "))
     interval_seconds = int(user_minutes * 60)
     interval_count = int(input("Desired number of timer repetitions: "))
-    print('\n')
     
     timer(interval_seconds, interval_count, nature_sound, player_check, fadeout, pause, play, fadein)
 
@@ -76,7 +74,6 @@ if __name__ == "__main__":
 
 # BUGS:
 # 
-# if volume starts muted, fadeout AppleScript divides by zero (not fatal)
 # program breaks if no input is given
                              
 

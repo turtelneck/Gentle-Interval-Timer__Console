@@ -1,8 +1,15 @@
-on run {desiredVolume}
+on run -- {desiredVolume}
 	
-	set currentVolume to output volume of (get volume settings)
+	set desiredVolume to 0
+	set currentVolume to 0 -- output volume of (get volume settings)
 	set interval to (1 / 60 * minutes) -- fade-in interval, 1 second
-	set waitTime to interval / (desiredVolume - currentVolume) -- spread out over interval time
+	
+	-- Avoid division by 0
+	if desiredVolume is 0 then
+		set waitTime to interval -- Assign a fallback wait time
+	else
+		set waitTime to interval / (desiredVolume - currentVolume) -- spread out over interval time
+	end if
 	
 	-- gradually increase volume
 	repeat with X from currentVolume to desiredVolume by 1
