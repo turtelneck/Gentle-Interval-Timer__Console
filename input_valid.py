@@ -3,12 +3,12 @@ def get_valid_float(prompt):
         try:
             user_input = input(prompt)
             if not user_input.strip(): # if input is empty
-                raise ValueError("Input cannot be empty.")
+                raise ValueError("Input cannot be empty")
             
             value = float(user_input) # ensure input is float
             
             if value < 0:
-                raise ValueError("Please enter a positive number.")
+                raise ValueError("Please enter a positive number")
             
             return value
         except ValueError as e:
@@ -20,12 +20,12 @@ def get_valid_int(prompt):
         try:
             user_input = input(prompt)
             if not user_input.strip(): # if input is empty
-                raise ValueError("Input cannot be empty.")
+                raise ValueError("Input cannot be empty")
             
             value = int(user_input) # ensure input is int
             
             if value <= 0:
-                raise ValueError("Must allow at least one loop.")
+                raise ValueError("Must allow at least one loop")
             
             return value
         except ValueError as e:

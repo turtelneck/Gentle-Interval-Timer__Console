@@ -1,7 +1,6 @@
-on run -- {desiredVolume}
+on run {desiredVolume}
 	
-	set desiredVolume to 0
-	set currentVolume to 0 -- output volume of (get volume settings)
+	set currentVolume to output volume of (get volume settings)
 	set interval to (1 / 60 * minutes) -- fade-in interval, 1 second
 	
 	-- Avoid division by 0
