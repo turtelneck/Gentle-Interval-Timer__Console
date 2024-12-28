@@ -21,4 +21,4 @@ if __name__ == "__main__":
 
 # TODO:
 # 
-#
+# adjust input_valid functions for non-terminal use.
