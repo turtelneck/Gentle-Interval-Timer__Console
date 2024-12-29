@@ -3,10 +3,9 @@ from tkinter import messagebox
 import threading
 import time
 from playsound import playsound
-
-# Importing existing modules
 import input_valid  # !!! Assumes these functions are adjusted for non-terminal use. Will need to fix.
 import timer_controls  # Timer logic
+
 
 class TimerApp:
     def __init__(self, root):
@@ -39,7 +38,7 @@ class TimerApp:
 
     def start_timer(self):
         try:
-            # Validate and parse inputs
+            # parse inputs
             minutes = float(self.minutes_entry.get())
             repetitions = int(self.repetitions_entry.get())
 
@@ -48,7 +47,7 @@ class TimerApp:
 
             interval_seconds = int(minutes * 60)
             
-            # Start the timer thread
+            # start timer
             self.running = True
             self.start_button.config(state=tk.DISABLED)
             self.cancel_button.config(state=tk.NORMAL)
