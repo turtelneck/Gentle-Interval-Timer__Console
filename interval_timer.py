@@ -8,7 +8,7 @@ def main():
     interval_count = input_valid.get_valid_int("\nDesired number of timer repetitions: ")
     
     timer_controls.timer(interval_seconds, interval_count)
-    print('\nAll loops complete!\n')
+    print('All loops complete!\n')
     
 
 if __name__ == "__main__":

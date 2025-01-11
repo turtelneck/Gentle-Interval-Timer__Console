@@ -45,7 +45,7 @@ def timer(interval_seconds, interval_count):
     time.sleep(0.4)
     print('\nTimer Beginning')
     time.sleep(0.8)
-    print(f'{mins} min, {sec} sec timer, repeats for {interval_count} intervals')
+    print(f'{mins} min, {sec} sec timer, repeats for {interval_count} intervals\n')
     time.sleep(interval_seconds) # first timer runs outside loop
     
     for _ in range(interval_count - 1):
